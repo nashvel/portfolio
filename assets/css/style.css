@@ -1,0 +1,104 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff; /* Default text color for better contrast on gradient */
+    min-height: 100vh;
+    padding-top: 70px; /* Adjust if navbar height changes */
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.1); /* Glassmorphism: semi-transparent white */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Make navbar fixed */
+    width: 100%;
+    top: 0;
+    z-index: 1030;
+}
+
+.navbar-brand, .nav-link {
+    color: #fff !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15); /* Glassmorphism */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 15px; /* Softer corners */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* More pronounced shadow */
+    color: #fff; /* Text color for cards */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d; /* For 3D effects on children if needed */
+}
+
+.card-title, .card-text {
+    color: #f0f0f0; /* Lighter text for better readability on glass */
+}
+
+.card:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale(1.05); /* 3D hover effect */
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+}
+
+.btn-primary {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+header.container h1, header.container .lead,
+#projects h2,
+#business-section h2, #business-section .lead {
+    color: #fff; /* Ensure text in these sections is white */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+footer {
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent footer */
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Optional: General glass effect class for other elements */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+}
+
+.model-container {
+    max-width: 500px; /* Adjust as needed */
+    margin: 20px auto; /* Center the container and add some vertical margin */
+    padding: 10px;
+    /* background: rgba(255, 255, 255, 0.08); */ /* Made transparent */
+    border-radius: 20px; /* Optional: rounded corners for the container */
+    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); */ /* Made transparent */
+}
+
+/* Adjustments for Bootstrap components on glass */
+.card-img-top {
+    border-top-left-radius: 15px; /* Match card's border-radius */
+    border-top-right-radius: 15px;
+    opacity: 0.9; /* Slightly transparent images */
+}

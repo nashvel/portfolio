@@ -1,0 +1,281 @@
+/* Manga Panel Theme for Admin Dashboard */
+
+body.admin-body {
+    background-color: #f0f0f0; /* Very light gray, almost white */
+    color: #222; /* Dark gray for text */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean sans-serif font */
+}
+
+/* --- Navbar --- */
+.manga-navbar {
+    background-color: #ffffff; /* White background */
+    border-bottom: 3px solid #000000; /* Strong black bottom border */
+    box-shadow: none; /* Remove existing shadow */
+}
+
+.manga-navbar .navbar-brand {
+    color: #000000 !important; /* Black brand text */
+    font-weight: bold;
+    font-size: 1.5rem; /* Make brand slightly larger */
+}
+
+.manga-navbar .navbar-nav .nav-item .navbar-text {
+    color: #333333 !important; /* Dark gray for welcome text */
+}
+
+.manga-navbar .navbar-nav .nav-item .btn-outline-danger {
+    border: 2px solid #000000;
+    color: #000000;
+    background-color: #ffffff;
+    font-weight: bold;
+    border-radius: 0; /* Sharp corners */
+}
+
+.manga-navbar .navbar-nav .nav-item .btn-outline-danger:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.manga-navbar .navbar-toggler {
+    border-color: #000000; /* Black toggler border */
+}
+
+.manga-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); /* Black icon */
+}
+
+/* --- Dashboard Header --- */
+.admin-dashboard-header {
+    background-color: #ffffff;
+    border: 3px solid #000000;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0; /* Sharp corners */
+    box-shadow: 5px 5px 0px #aaaaaa; /* Offset shadow for panel effect */
+}
+
+.admin-dashboard-header h1 {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: 2.2rem;
+}
+
+/* --- General Text & Links --- */
+.container p {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* --- Cards (Manga Panels) --- */
+.card {
+    background-color: #ffffff;
+    border: 3px solid #000000 !important; /* Important to override Bootstrap */
+    border-radius: 0 !important; /* Sharp corners */
+    box-shadow: 5px 5px 0px #aaaaaa !important; /* Offset shadow for panel effect */
+    margin-bottom: 2rem;
+    padding: 10px; /* Add some internal padding to the card itself */
+}
+
+.card .card-body {
+    padding: 1rem; /* Keep Bootstrap's card-body padding or adjust */
+}
+
+.card .card-title {
+    color: #000000;
+    font-weight: bold;
+    font-size: 1.5rem; /* Larger card titles */
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #dddddd; /* Separator for title */
+    padding-bottom: 0.5rem;
+}
+
+.card .card-text {
+    color: #222222;
+    font-size: 0.95rem;
+}
+
+.card .btn-primary {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 0; /* Sharp corners */
+    padding: 0.5rem 1rem;
+}
+
+.card .btn-primary:hover {
+    background-color: #333333; /* Darken on hover */
+    border-color: #333333;
+}
+
+/* --- Admin Login Page Specific (to keep it somewhat consistent) --- */
+.admin-login-container .card {
+    border: 3px solid #000000 !important;
+    box-shadow: 5px 5px 0px #aaaaaa !important;
+    border-radius: 0 !important;
+}
+
+.admin-login-container .card-title {
+    color: #000000;
+    font-weight: bold;
+}
+
+.admin-login-container .btn-primary {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+.admin-login-container .btn-primary:hover {
+    background-color: #333333;
+    border-color: #333333;
+}
+
+/* --- Notification Page Specific Styles --- */
+.manga-alert {
+    border: 3px solid #000000 !important;
+    border-radius: 0 !important;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 5px 5px 0px #aaaaaa !important;
+}
+
+.manga-alert .alert-heading {
+    color: #000;
+    font-weight: bold;
+}
+
+.manga-alert .alert-link {
+    color: #007bff; /* Standard link blue, or choose a manga accent */
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.manga-alert .alert-link:hover {
+    color: #0056b3;
+}
+
+.manga-btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 0; /* Sharp corners */
+    padding: 0.5rem 1rem;
+    border: 2px solid #5a6268;
+}
+
+.manga-btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+
+/* Responsive adjustments for manga style */
+@media (max-width: 768px) {
+    .admin-dashboard-header h1 {
+        font-size: 1.8rem;
+    }
+    .manga-navbar .navbar-brand {
+        font-size: 1.3rem;
+    }
+    .card .card-title {
+        font-size: 1.3rem;
+    }
+    .navbar-nav .nav-item .navbar-text {
+        display: none; /* Hide welcome message on small screens */
+    }
+}
+
+/* --- Mobile Bottom Navigation --- */
+.mobile-bottom-nav {
+    display: none; /* Hidden by default */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 3px solid #000000;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    z-index: 1000; /* Ensure it's above other content */
+    padding: 5px 0; /* Reduced padding */
+}
+
+.mobile-bottom-nav .nav-item {
+    position: relative; /* Needed for absolute positioning of the badge */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    text-decoration: none;
+    color: #333333;
+    padding: 5px 0; /* Reduced padding */
+    font-size: 0.75rem; /* Smaller font size for labels */
+}
+
+.mobile-bottom-nav .nav-item i {
+    font-size: 1.4rem; /* Icon size */
+    margin-bottom: 3px;
+}
+
+.mobile-bottom-nav .nav-item span {
+    display: block;
+}
+
+.mobile-bottom-nav .nav-item.active,
+.mobile-bottom-nav .nav-item:hover {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Show mobile nav and add bottom padding to body only on smaller screens */
+@media (max-width: 768px) {
+    .mobile-bottom-nav {
+        display: flex; /* Show on mobile */
+        justify-content: space-around;
+    }
+    body.admin-body {
+        padding-bottom: 70px; /* Adjust based on nav height, ensures content isn't hidden */
+    }
+    .admin-dashboard-header h1 {
+        font-size: 1.8rem;
+    }
+    .manga-navbar .navbar-brand {
+        font-size: 1.3rem;
+    }
+    .card .card-title {
+        font-size: 1.3rem;
+    }
+    .navbar-nav .nav-item .navbar-text {
+        display: none; /* Hide welcome message on small screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-dashboard-header h1 {
+        font-size: 1.6rem;
+    }
+    .card .card-title {
+        font-size: 1.2rem;
+    }
+    .admin-dashboard-header,
+    .card {
+        box-shadow: 3px 3px 0px #aaaaaa !important; /* Reduce shadow on smaller screens */
+        margin-bottom: 1.5rem;
+    }
+    body.admin-body {
+        padding: 0.5rem; /* Add some padding to body on small screens */
+    }
+    .container.mt-4 {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        margin-top: 1rem !important;
+    }
+}
+
