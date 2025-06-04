@@ -1,6 +1,6 @@
 <?php
 require_once 'init_session.php';
-// CSRF token generation
+
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -48,42 +48,6 @@ $csrf_token = $_SESSION['csrf_token'];
         </model-viewer>
     </div>
 </header>
-
-<!--
-<section id="projects" class="container mb-5">
-    <h2 class="mb-4">My Projects</h2>
-    <div class="row g-4">
-        
-        <div class="col-md-4">
-            <div class="card h-100">
-                <img src="https://via.placeholder.com/400x200?text=Project+1" class="card-img-top" alt="Project 1">
-                <div class="card-body">
-                    <h5 class="card-title">Student Management System</h5>
-                    <p class="card-text">A web app to manage students, grades, and attendance. Built with PHP & MySQL.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card h-100">
-                <img src="https://via.placeholder.com/400x200?text=Project+2" class="card-img-top" alt="Project 2">
-                <div class="card-body">
-                    <h5 class="card-title">E-commerce Mini Shop</h5>
-                    <p class="card-text">Simple online shop with cart and checkout. PHP, Bootstrap, secure payments (demo).</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card h-100">
-                <img src="https://via.placeholder.com/400x200?text=Project+3" class="card-img-top" alt="Project 3">
-                <div class="card-body">
-                    <h5 class="card-title">Portfolio Website</h5>
-                    <p class="card-text">This very portfolio! Responsive, secure, and ready for employers or clients.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
--->
 
 <section id="business-section" class="container mb-5 text-center">
     <h2 class="mb-4">Interested in Collaborating?</h2>

@@ -1,13 +1,13 @@
 <?php
 session_start();
-require_once 'db.php'; // Database connection
+require_once 'db.php'; 
 
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // CSRF Token Validation
+
     if (!isset($_POST['csrf_token']) || !isset($_SESSION['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        http_response_code(403); // Forbidden
+        http_response_code(403); 
         echo json_encode(['status' => 'error', 'message' => 'CSRF token validation failed.']);
         exit;
     }
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Sanitize user_agent before storing
+
     $user_agent_sanitized = htmlspecialchars($user_agent, ENT_QUOTES, 'UTF-8');
 
     try {
@@ -39,24 +39,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($stmt->rowCount() > 0) {
                 echo json_encode(['status' => 'success', 'message' => 'Message details updated.']);
             } else {
-                // This could happen if the message_id doesn't exist, or if the values are the same as existing ones
-                // For this use case, not finding the ID is more likely an issue.
-                http_response_code(404); // Not Found
+
+                http_response_code(404);
                 echo json_encode(['status' => 'error', 'message' => 'Message ID not found or no changes made.']);
             }
         } else {
-            http_response_code(500); // Internal Server Error
+            http_response_code(500); 
             error_log('Failed to execute update statement for message ID: ' . $message_id);
             echo json_encode(['status' => 'error', 'message' => 'Failed to update message details.']);
         }
     } catch (PDOException $e) {
-        http_response_code(500); // Internal Server Error
+        http_response_code(500); 
         error_log('Database error while updating message details: ' . $e->getMessage());
         echo json_encode(['status' => 'error', 'message' => 'A database error occurred.']);
     }
 
 } else {
-    http_response_code(405); // Method Not Allowed
+    http_response_code(405); 
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
 }
 ?>

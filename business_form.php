@@ -1,6 +1,6 @@
 <?php
 session_start();
-// CSRF token generation
+
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -63,7 +63,7 @@ $csrf_token = $_SESSION['csrf_token'];
                 <label for="language" class="form-label">Select Language/Framework:</label>
                 <select class="form-select" id="language" name="language">
                     <option value="" selected disabled>Select language...</option>
-                    <!-- Options will be populated by JavaScript -->
+                    
                 </select>
             </div>
 

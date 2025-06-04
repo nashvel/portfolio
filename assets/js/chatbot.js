@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addMessage(message, sender, isTyping = false) {
         if (isTyping) {
-            // Remove previous typing indicator if any
             if (typingIndicator) {
                 typingIndicator.remove();
             }
@@ -17,12 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
             avatar.alt = 'Bot';
             avatar.classList.add('avatar');
             const messageP = document.createElement('p');
-            messageP.innerHTML = '<span>.</span><span>.</span><span>.</span>'; // Simple dot animation
+            messageP.innerHTML = '<span>.</span><span>.</span><span>.</span>';
             typingIndicator.appendChild(avatar);
             typingIndicator.appendChild(messageP);
             chatBox.appendChild(typingIndicator);
         } else {
-            // Remove typing indicator if it exists and we are adding a real message
             if (typingIndicator) {
                 typingIndicator.remove();
                 typingIndicator = null;
@@ -48,11 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             chatBox.appendChild(messageDiv);
         }
-        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     async function getAIResponse(userMessage) {
-        addMessage('', 'bot', true); // Show typing indicator
+        addMessage('', 'bot', true);
 
         try {
             const response = await fetch('ai_handler.php', {
@@ -93,5 +91,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initial bot message is now in chatbot.php HTML
 });

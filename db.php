@@ -1,5 +1,5 @@
 <?php
-// Secure DB connection for XAMPP (default user: root, no password)
+
 $host = 'localhost';
 $db   = 'portfolio';
 $user = 'root';

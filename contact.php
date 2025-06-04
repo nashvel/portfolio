@@ -4,73 +4,64 @@ require_once 'db.php';
 
 function enforceInquiryLimit($pdo, $limit = 10) {
     try {
-        // Count current inquiries
+
         $countStmt = $pdo->query("SELECT COUNT(*) FROM messages");
         $current_count = (int) $countStmt->fetchColumn();
 
         if ($current_count > $limit) {
             $rows_to_delete = $current_count - $limit;
 
-            // Delete the oldest inquiries. 
-            // IMPORTANT: This assumes 'id' is an auto-incrementing primary key.
-            // If you have a 'created_at' or 'submission_date' timestamp column, 
-            // it's better to use that for ordering: ORDER BY your_timestamp_column ASC
             $deleteSql = "DELETE FROM messages ORDER BY created_at ASC LIMIT :rows_to_delete";
             $deleteStmt = $pdo->prepare($deleteSql);
             $deleteStmt->bindParam(':rows_to_delete', $rows_to_delete, PDO::PARAM_INT);
             $deleteStmt->execute();
             
-            // Optional: Log that deletion occurred
-            // error_log($rows_to_delete . " old inquiries deleted to maintain limit of " . $limit);
         }
     } catch (PDOException $e) {
-        // Log error, but don't let it break the main contact form submission flow
+
         error_log('Error in enforceInquiryLimit: ' . $e->getMessage());
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // CSRF token check
+
     if (!isset($_POST['csrf_token']) || !isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
         error_log('CSRF token mismatch. SESSION: ' . ($_SESSION['csrf_token'] ?? 'not set') . ' POST: ' . ($_POST['csrf_token'] ?? 'not set'));
         die('Invalid CSRF token');
     }
 
-    // Sanitize and validate inputs
+
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $message = trim($_POST['message'] ?? '');
     $business_type = trim($_POST['business_type'] ?? '');
-    $capstone_type = trim($_POST['capstone_type'] ?? ''); // Optional
-    $language = trim($_POST['language'] ?? ''); // Optional
-    $dev_focus = trim($_POST['dev_focus'] ?? ''); // Optional
-    $db_type = trim($_POST['db_type'] ?? ''); // Optional
+    $capstone_type = trim($_POST['capstone_type'] ?? '');
+    $language = trim($_POST['language'] ?? '');
+    $dev_focus = trim($_POST['dev_focus'] ?? '');
+    $db_type = trim($_POST['db_type'] ?? '');
 
-    // Device data (user_agent only)
-    // $latitude = filter_input(INPUT_POST, 'latitude', FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION); // Removed
-    // $longitude = filter_input(INPUT_POST, 'longitude', FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION); // Removed
     $user_agent = trim($_POST['user_agent'] ?? '');
 
-    // Basic validation
+
     if (empty($name) || empty($email) || empty($message) || empty($business_type)) {
         http_response_code(400);
         echo json_encode(['status' => 'error', 'message' => 'Invalid input: Name, Email, Message, and Business Type are required.']);
         exit;
     }
-    // Validate user_agent
+
     if (empty($user_agent)) {
         http_response_code(400);
         echo json_encode(['status' => 'error', 'message' => 'Invalid input: User agent is required.']);
         exit;
     }
-    // Latitude/longitude specific validation removed
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         http_response_code(400);
         echo json_encode(['status' => 'error', 'message' => 'Invalid email format.']);
         exit;
     }
 
-    // Conditional validation for capstone and language
+
     if ($business_type === 'Capstone') {
         if (empty($capstone_type)) {
             http_response_code(400);
@@ -88,9 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Conditional validation for dev_focus and db_type
-    // These are only submitted if their respective groups are visible, which JS handles.
-    // So, if they are present, they should have a value.
     if (!empty($language) && empty($dev_focus)) {
         http_response_code(400);
         echo json_encode(['status' => 'error', 'message' => 'Invalid input: Development Focus is required when a language is selected.']);
@@ -127,13 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(6, $language, $language ? PDO::PARAM_STR : PDO::PARAM_NULL);
         $stmt->bindParam(7, $dev_focus, $dev_focus ? PDO::PARAM_STR : PDO::PARAM_NULL);
         $stmt->bindParam(8, $db_type, $db_type ? PDO::PARAM_STR : PDO::PARAM_NULL);
-        // Latitude and Longitude parameters removed
+
         $stmt->bindParam(9, $user_agent_sanitized);
         
         $stmt->execute();
         $lastId = $pdo->lastInsertId();
 
-        // Enforce the inquiry limit after successful insertion
+
         enforceInquiryLimit($pdo); 
         
         header('Content-Type: application/json');
@@ -146,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 } else {
-    http_response_code(405); // Method Not Allowed
+    http_response_code(405);
     header('Content-Type: application/json');
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
 }
