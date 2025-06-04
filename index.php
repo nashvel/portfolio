@@ -26,6 +26,7 @@ $csrf_token = $_SESSION['csrf_token'];
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="business_form.php">Business Inquiry</a></li>
+        <li class="nav-item"><a class="nav-link" href="chatbot.php">Chat with AI</a></li>
       </ul>
     </div>
   </div>
