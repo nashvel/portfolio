@@ -27,7 +27,7 @@ try {
     $stmt->execute();
     $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    // Handle error, e.g., log it or display a user-friendly message
+
     error_log('Error fetching inquiries: ' . $e->getMessage());
     $page_error = 'Could not retrieve inquiries from the database.';
 }
@@ -44,12 +44,12 @@ try {
     <link rel="stylesheet" href="assets/css/admin_style.css">
     <style>
         .table-responsive {
-            max-height: 70vh; /* Adjust as needed */
+            max-height: 70vh;
         }
         th {
             position: sticky;
             top: 0;
-            background: white; /* To prevent text overlap during scroll */
+            background: white; 
             z-index: 10;
         }
     </style>
@@ -141,7 +141,7 @@ try {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Mobile Bottom Navigation -->
+    
     <nav class="mobile-bottom-nav">
         <a href="admin_dashboard.php" class="nav-item">
             <i class="fas fa-home"></i>

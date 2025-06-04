@@ -1,26 +1,26 @@
 <?php
 require_once 'init_session.php';
 
-// Check if the admin is logged in, otherwise redirect to login page
+
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     $_SESSION['login_error'] = 'Please log in to access this page.';
     header('Location: admin_login.php');
     exit;
 }
 
-require_once 'db.php'; // Database connection
-require_once 'admin_helpers.php'; // For hasNewInquiries()
+require_once 'db.php'; 
+require_once 'admin_helpers.php'; 
 $admin_username = $_SESSION['admin_username'] ?? 'Admin';
 
-// Generate a CSRF token for the logout form if one doesn't exist
+
 if (empty($_SESSION['logout_csrf_token'])) {
     $_SESSION['logout_csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Call hasNewInquiries before 'last_notification_view_time' is updated by this page load.
+
 $has_new_inquiries = hasNewInquiries($pdo);
 
-// Fetch recent inquiries
+
 $recent_inquiries = [];
 $fetch_error = null;
 try {
@@ -33,16 +33,14 @@ try {
     $fetch_error = 'Could not retrieve recent inquiries from the database.';
 }
 
-// Mark notifications as seen by storing the timestamp of the newest inquiry or current time
+
 if (!empty($recent_inquiries)) {
     $_SESSION['last_notification_view_time'] = $recent_inquiries[0]['created_at'];
-} elseif (!$fetch_error) { // Only update if there wasn't an error and no inquiries (i.e., table is empty or all are older)
-    // If no inquiries, set last view time to now, so any new one will be 'new'
-    // Or, if the table is truly empty, this means all (zero) have been seen.
+} elseif (!$fetch_error) { 
+
     $_SESSION['last_notification_view_time'] = date('Y-m-d H:i:s'); 
 }
-// If $fetch_error is true, we don't update the last_notification_view_time, 
-// so the badge might persist until the error is resolved and notifications can be properly viewed.
+
 
 ?>
 <!DOCTYPE html>
@@ -90,14 +88,14 @@ if (!empty($recent_inquiries)) {
                 <p class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i><?php echo htmlspecialchars($fetch_error); ?></p>
             </div>
         <?php elseif (empty($recent_inquiries)):
-            // Check if there are any inquiries at all to differentiate message
+
             $total_inquiries_count = 0;
             try {
                 $sql_count = "SELECT COUNT(*) FROM messages";
                 $count_stmt = $pdo->prepare($sql_count);
                 $count_stmt->execute();
                 $total_inquiries_count = (int) $count_stmt->fetchColumn();
-            } catch (PDOException $e) { /* Do nothing, error already logged or handled by $fetch_error */ }
+            } catch (PDOException $e) { }
 
             if ($total_inquiries_count === 0) : ?>
                 <div class="alert alert-secondary manga-alert" role="alert">
@@ -132,7 +130,7 @@ if (!empty($recent_inquiries)) {
         </div>
     </div>
 
-    <!-- Mobile Bottom Navigation (Copied from admin_dashboard.php for consistency) -->
+
     <nav class="mobile-bottom-nav">
         <a href="admin_dashboard.php" class="nav-item">
             <i class="fas fa-home"></i>

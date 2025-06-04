@@ -1,9 +1,9 @@
 <?php
 require_once 'init_session.php';
 require_once 'db.php'; // For PDO
-require_once 'admin_helpers.php'; // For hasNewInquiries()
+require_once 'admin_helpers.php';
 
-// Check if the admin is logged in, otherwise redirect to login page
+
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     $_SESSION['login_error'] = 'Please log in to access the admin dashboard.';
     header('Location: admin_login.php');
@@ -12,7 +12,6 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 $admin_username = $_SESSION['admin_username'] ?? 'Admin';
 
-// Generate a CSRF token for the logout form if one doesn't exist
 if (empty($_SESSION['logout_csrf_token'])) {
     $_SESSION['logout_csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -72,7 +71,7 @@ $has_new_inquiries = hasNewInquiries($pdo);
                     </div>
                 </div>
             </div>
-            <!-- Add more cards for other admin functionalities later -->
+
         </div>
 
     </div>

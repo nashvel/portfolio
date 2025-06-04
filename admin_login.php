@@ -1,18 +1,18 @@
 <?php
 require_once 'init_session.php';
-// If already logged in, redirect to a future admin dashboard page
+
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: admin_dashboard.php'); // Create this page later
+    header('Location: admin_dashboard.php'); 
     exit;
 }
 
 $error_message = '';
 if (isset($_SESSION['login_error'])) {
     $error_message = $_SESSION['login_error'];
-    unset($_SESSION['login_error']); // Clear the error message after displaying it
+    unset($_SESSION['login_error']); 
 }
 
-// Generate a CSRF token for the login form if one doesn't exist
+
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }

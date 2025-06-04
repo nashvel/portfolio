@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if(successMsg) successMsg.style.display = 'none';
             if(errorMsg) errorMsg.style.display = 'none';
 
-            // Directly call submitFormData without any geolocation logic
+
             await submitFormData();
         });
     }
