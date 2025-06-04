@@ -41,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $message = trim($_POST['message'] ?? '');
     $business_type = trim($_POST['business_type'] ?? '');
-    $capstone_type = trim($_POST['capstone_type'] ?? null); // Optional
-    $language = trim($_POST['language'] ?? null); // Optional
-    $dev_focus = trim($_POST['dev_focus'] ?? null); // Optional
-    $db_type = trim($_POST['db_type'] ?? null); // Optional
+    $capstone_type = trim($_POST['capstone_type'] ?? ''); // Optional
+    $language = trim($_POST['language'] ?? ''); // Optional
+    $dev_focus = trim($_POST['dev_focus'] ?? ''); // Optional
+    $db_type = trim($_POST['db_type'] ?? ''); // Optional
 
     // Device data (user_agent only)
     // $latitude = filter_input(INPUT_POST, 'latitude', FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION); // Removed
