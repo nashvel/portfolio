@@ -1,5 +1,90 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Adjust for navbar height
+                    behavior: 'smooth'
+                });
+                
+                // Close navbar collapse on mobile
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    document.querySelector('.navbar-toggler').click();
+                }
+            }
+        });
+    });
     
+    // Navbar animation on scroll
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.style.padding = '12px 0';
+                navbar.style.boxShadow = '0 4px 10px rgba(0,0,0,0.05)';
+            } else {
+                navbar.style.padding = '16px 0';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    }
+    
+    // Initialize carousel with controls
+    const modelCarousel = document.getElementById('avatarCarousel');
+    if (modelCarousel) {
+        // Pause auto rotation when interacting with model viewer
+        const modelViewers = document.querySelectorAll('model-viewer');
+        modelViewers.forEach(viewer => {
+            viewer.addEventListener('camera-change', () => {
+                // Add a class to track user interaction
+                viewer.classList.add('user-interacting');
+            });
+        });
+        
+        // Add keyboard navigation for carousel
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                const prevButton = document.querySelector('[data-bs-slide="prev"]');
+                if (prevButton) prevButton.click();
+            } else if (e.key === 'ArrowRight') {
+                const nextButton = document.querySelector('[data-bs-slide="next"]');
+                if (nextButton) nextButton.click();
+            }
+        });
+    }
+    
+    // Animation on scroll
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    animateElements.forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Handle form submissions
+    
+    // Generic contact form
     const genericContactForm = document.getElementById('contact-form');
     if (genericContactForm) {
         genericContactForm.addEventListener('submit', async function(e) {
@@ -23,8 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
     
+    // Business inquiry form
     const businessForm = document.getElementById('business-inquiry-form');
     if (businessForm) {
         const businessTypeSelect = document.getElementById('business_type');
@@ -127,13 +212,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        
         businessForm.addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const successMsg = businessForm.querySelector('#business-success-message');
             const errorMsg = businessForm.querySelector('#business-error-message');
-
 
             async function submitFormData() {
                 if(successMsg) {
@@ -145,9 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const userAgent = navigator.userAgent;
                 const formData = new FormData(businessForm);
 
-
                 formData.append('user_agent', userAgent);
-
 
                 if (capstoneTypeGroup.style.display !== 'none' && capstoneTypeSelect.value) {
                     formData.set('capstone_type', capstoneTypeSelect.value);
@@ -195,8 +276,34 @@ document.addEventListener('DOMContentLoaded', function() {
             if(successMsg) successMsg.style.display = 'none';
             if(errorMsg) errorMsg.style.display = 'none';
 
-
             await submitFormData();
+        });
+    }
+    
+    // Project filtering functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
+    
+    if (filterButtons.length > 0 && projectItems.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter projects
+                projectItems.forEach(item => {
+                    if (filterValue === 'all') {
+                        item.style.display = 'block';
+                    } else if (item.classList.contains(filterValue)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
         });
     }
 });
