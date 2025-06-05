@@ -36,16 +36,42 @@ $csrf_token = $_SESSION['csrf_token'];
     <h1>I'm Nacht, a 3rd year BSIT student</h1>
     <p class="lead">Welcome to my portfolio! Here are some projects I've worked on. If you'd like to hire me or buy a project, please contact me below.</p>
     <div class="model-container mt-4">
-        <model-viewer src="https://cdn.jsdelivr.net/gh/nashvel/portfolio/assets/models/sora.glb"
-                      alt="3D Avatar of Nacht"
-                      auto-rotate
-                      camera-controls
-                      camera-orbit="0deg 75deg 2.5m"
-                      disable-pan
-                      ar
-                      shadow-intensity="1"
-                      style="width: 100%; height: 400px; --mv-toolbar-size: 30px; border-radius: 15px;">
-        </model-viewer>
+        <div id="avatarCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#avatarCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#avatarCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <model-viewer 
+                        src="https://cdn.jsdelivr.net/gh/nashvel/portfolio/assets/models/geto_suguru_fanart.glb"
+                        alt="Geto Suguru 3D Avatar"
+                        auto-rotate
+                        camera-controls
+                        camera-orbit="0deg 75deg 5m"
+                        disable-pan
+                        ar
+                        shadow-intensity="1"
+                        style="width: 100%; height: 400px; --mv-toolbar-size: 30px; border-radius: 15px;">
+                        <div class="progress-bar hide" slot="progress-bar"><div class="update-bar"></div></div>
+                    </model-viewer>
+                </div>
+                <div class="carousel-item">
+                    <model-viewer 
+                        src="https://cdn.jsdelivr.net/gh/nashvel/portfolio/assets/models/tatsumaki_-_one_punch_man.glb"
+                        alt="Tatsumaki 3D Avatar"
+                        auto-rotate
+                        camera-controls
+                        camera-orbit="0deg 75deg 7m" 
+                        disable-pan
+                        ar
+                        shadow-intensity="1"
+                        style="width: 100%; height: 400px; --mv-toolbar-size: 30px; border-radius: 15px;">
+                        <div class="progress-bar hide" slot="progress-bar"><div class="update-bar"></div></div>
+                    </model-viewer>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
 
