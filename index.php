@@ -26,7 +26,7 @@ $csrf_token = $_SESSION['csrf_token'];
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="business_form.php">Business Inquiry</a></li>
-        <li class="nav-item"><a class="nav-link" href="chatbot.php">Chat with AI</a></li>
+        <li class="nav-item"><a class="nav-link" href="ai_assistant.php">Chat with AI</a></li>
       </ul>
     </div>
   </div>
@@ -36,7 +36,7 @@ $csrf_token = $_SESSION['csrf_token'];
     <h1>I'm Nacht, a 3rd year BSIT student</h1>
     <p class="lead">Welcome to my portfolio! Here are some projects I've worked on. If you'd like to hire me or buy a project, please contact me below.</p>
     <div class="model-container mt-4">
-        <model-viewer src="assets/models/sora.glb"
+        <model-viewer src="https://cdn.jsdelivr.net/gh/nashvel/portfolio/assets/models/sora.glb"
                       alt="3D Avatar of Nacht"
                       auto-rotate
                       camera-controls

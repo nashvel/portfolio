@@ -24,7 +24,6 @@ if ($apiKey === 'YOUR_NEW_PRIVATE_API_KEY_HERE') {
 $data = [
     'model' => $modelName,
     'messages' => [
-        ['role' => 'system', 'content' => 'You are a helpful assistant.'], 
         ['role' => 'user', 'content' => $userMessage]
     ]
 ];
@@ -36,6 +35,8 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Content-Type: application/json',
     'Authorization: Bearer ' . $apiKey,
+    'HTTP-Referer: https://dev-nacht.unaux.com/',
+    // 'X-Title: My Portfolio Chatbot' // Optional: A name for your app for OpenRouter logs
 ]);
 
 $response = curl_exec($ch);
